@@ -5,6 +5,8 @@ glob = require("glob")
 mm = require("marky-mark")
 slug = require("slug")
 markdownpdf = require("markdown-pdf")
+sstatic = require('node-static')
+http = require('http')
 
 jade_opts =
   pretty: true
@@ -48,6 +50,13 @@ task 'build.blogs', (options) ->
         console.log 'The file was saved!'
       return
     return
+
+task 'server', (options) ->
+  file = new (sstatic.Server)('./tmp')
+  http.createServer((req, res) ->
+    file.serve req, res
+    return
+  ).listen 8080
 
 task 'build', (options) ->
   invoke('build.index')
