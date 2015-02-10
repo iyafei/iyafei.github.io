@@ -15,6 +15,14 @@ universe = ->
     page.url = "/blog/" + slug(page.meta.title) + ".html"
   return {"blog_entries":blog_entries}
 
+task 'build.index', (options) ->
+  fs.writeFile "./tmp/index.html", jade.renderFile("./_src/index.jade", _.merge(jade_opts, universe() )), (err) ->
+    if err
+      console.log err
+    else
+      console.log "The file was saved!"
+    return
+
 task 'build.resume.html', (options) ->
   fs.writeFile "./tmp/resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
     if err
@@ -39,3 +47,9 @@ task 'build.blogs', (options) ->
         console.log 'The file was saved!'
       return
     return
+
+task 'build', (options) ->
+  invoke('build.index')
+  invoke('build.blogs')
+  invoke('build.resume.pdf')
+  invoke('build.resume.html')
