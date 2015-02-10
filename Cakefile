@@ -10,6 +10,7 @@ jade_opts =
   pretty: true
 
 universe = ->
+  console.log("building the universe...")
   blog_entries = mm.parseMatchesSync("../../", [ "_src/blog_entries/*.md" ])
   _.each blog_entries, (page) ->
     page.url = "/blog/" + slug(page.meta.title) + ".html"
@@ -20,7 +21,7 @@ task 'build.index', (options) ->
     if err
       console.log err
     else
-      console.log "The file was saved!"
+      console.log "./tmp/index.html"
     return
 
 task 'build.resume.html', (options) ->
@@ -28,12 +29,12 @@ task 'build.resume.html', (options) ->
     if err
       console.log err
     else
-      console.log "The file was saved!"
+      console.log "./tmp/resume.html"
     return
 
 task 'build.resume.pdf', (options) ->
   markdownpdf().from('_src/resume.md').to './tmp/resume.pdf', ->
-    console.log 'Done'
+    console.log '_src/resume.md'
     return
 
 task 'build.blogs', (options) ->
