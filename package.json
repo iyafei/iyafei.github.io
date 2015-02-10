@@ -1,0 +1,31 @@
+{
+  "name": "adamwong246.github.io",
+  "version": "0.0.0",
+  "description": "This is an exceedingly simple blog made with Middleman and deployed to Github pages here: http://adamwong246.github.io/",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamwong246/adamwong246.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamwong246/adamwong246.github.io/issues"
+  },
+  "homepage": "https://github.com/adamwong246/adamwong246.gilhub.io",
+  "dependencies": {
+    "coffee-script": "^1.9.0",
+    "command-line-args": "^0.5.3",
+    "lodash": "^2.4.1",
+    "markdown-pdf": "^4.0.0",
+    "marky-mark": "latest",
+    "slug": "^0.8.0",
+    "yaml-front-matter": "^3.2.3"
+  },
+  "devDependencies": {
+    "clone": "^0.2.0",
+    "event-stream": "^3.2.1",
+    "jade": "^1.8.2",
+    "live-reload": "latest"
+  }
+}

@@ -1,0 +1,9 @@
+extends layout.jade
+
+block page_title
+  title
+    != page.meta.title
+
+block content
+  h2= page.meta.title
+  != page.content
