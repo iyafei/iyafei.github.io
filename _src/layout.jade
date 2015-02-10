@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    block page_title
+      title exact change only
+  body
+    a(href="/")
+      h1 exact change only
+    ul.contact
+      li
+        a(href="mailto:adamwong246@gmail.com") adamwong246@gmail.com
+    ul.links
+      li
+        a(href="/resume.html") resume.html
+    ul.nav
+      - for entry in blog_entries
+        li
+          a(href=entry.url)= entry.meta.title
+
+    block content
+      != self.content
+
+    footer
+      h3 adam wong 2015
