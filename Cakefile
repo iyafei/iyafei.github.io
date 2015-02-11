@@ -52,6 +52,7 @@ task 'build.blogs', (options) ->
     return
 
 task 'server', (options) ->
+  console.log('server now running on port 8080...')
   file = new (sstatic.Server)('./tmp')
   http.createServer((req, res) ->
     file.serve req, res
