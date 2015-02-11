@@ -1,21 +1,28 @@
 {
   "name": "adamwong246.github.io",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "license": "ISC",
   "description": "An exceedingly simple blog written in coffeescript, run by cake, managed with npm and hosted on Github pages.",
-  "main": "index.js",
+  "author": "Adam Wong adamwong246@gmail.com",
+  "contributors": [{
+    "name": "Adam Wong",
+    "email": "adamwong246@gmail.com"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/adamwong246/adamwong246.github.io.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/adamwong246/adamwong246.github.io/issues"
   },
-  "homepage": "https://github.com/adamwong246/adamwong246.gilhub.io",
+  "homepage": "http://adamwong246.github.io/",
+  "keywords": [
+    "static",
+    "blog",
+    "cake"
+  ],
   "dependencies": {
     "coffee-script": "^1.9.0",
-    "command-line-args": "^0.5.3",
     "concat": "^1.0.0",
     "lodash": "^2.4.1",
     "markdown-pdf": "^4.0.0",
@@ -24,12 +31,8 @@
     "node-static": "^0.7.6",
     "normalize.css": "^3.0.2",
     "slug": "^0.8.0",
-    "yaml-front-matter": "^3.2.3"
-  },
-  "devDependencies": {
-    "clone": "^0.2.0",
-    "event-stream": "^3.2.1",
     "jade": "^1.8.2",
-    "live-reload": "latest"
+    "yaml-front-matter": "^3.2.3",
+    "glob": "latest"
   }
 }
