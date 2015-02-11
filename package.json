@@ -16,11 +16,13 @@
   "dependencies": {
     "coffee-script": "^1.9.0",
     "command-line-args": "^0.5.3",
+    "concat": "^1.0.0",
     "lodash": "^2.4.1",
     "markdown-pdf": "^4.0.0",
     "marky-mark": "latest",
     "memoizee": "^0.3.8",
     "node-static": "^0.7.6",
+    "normalize.css": "^3.0.2",
     "slug": "^0.8.0",
     "yaml-front-matter": "^3.2.3"
   },

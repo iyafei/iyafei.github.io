@@ -8,6 +8,7 @@ markdownpdf = require("markdown-pdf")
 sstatic = require('node-static')
 http = require('http')
 memoize = require('memoizee')
+file_concat = require('concat')
 
 jade_opts =
   pretty: true
@@ -66,6 +67,14 @@ task 'build.blogs', (options) ->
       return
     return
 
+task 'build.assets', (options) ->
+  file_concat [
+    './_src/style.css'
+    './node_modules/normalize.css/normalize.css'
+  ], 'style.css', (error) ->
+    console.log('style.css')
+    return
+
 task 'server', (options) ->
   console.log('server now running on port 8080...')
   file = new (sstatic.Server)('.')
@@ -79,3 +88,4 @@ task 'build', (options) ->
   invoke('build.blogs')
   invoke('build.resume.pdf')
   invoke('build.resume.html')
+  invoke('build.assets')
