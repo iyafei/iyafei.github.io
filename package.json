@@ -1,16 +1,15 @@
 {
-  "name": "adamwong246.github.io",
-  "version": "0.0.2",
+  "name": "exact change only",
+  "version": "0.0.3",
   "license": "ISC",
   "description": "An exceedingly simple blog written in coffeescript, run by cake, managed with npm and hosted on Github pages.",
-  "author": "Adam Wong adamwong246@gmail.com",
-  "contributors": [{
+  "author": {
     "name": "Adam Wong",
     "email": "adamwong246@gmail.com"
-  }],
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adamwong246/adamwong246.github.io.git"
+    "url": "https://github.com/adamwong246/adamwong246.github.io"
   },
   "bugs": {
     "url": "https://github.com/adamwong246/adamwong246.github.io/issues"

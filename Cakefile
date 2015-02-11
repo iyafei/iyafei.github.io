@@ -18,7 +18,7 @@ universe = ->
   blog_entries = mm.parseMatchesSync("../../", [ "_src/blog_entries/*.md" ])
   _.each blog_entries, (page) ->
     page.url = "/blog/" + slug(page.meta.title) + ".html"
-  return {"blog_entries":blog_entries}
+  return {"blog_entries":blog_entries, "package": require("./package.json")}
 
 memo_universe = memoize(universe);
 

@@ -4,14 +4,14 @@ html(lang="en")
     meta(charset="utf-8")
     link(href='/style.css', rel='stylesheet', type="text/css")
     block page_title
-      title exact change only
+      title= package.name
   body
     nav
       a(href="/")
-        h1 exact change only
+        h1= package.name
       ul.contact
         li
-          a(href="mailto:adamwong246@gmail.com") adamwong246@gmail.com
+          a(href="mailto:" + package.author.email)= package.author.email
       ul.pages
         li
           a(href="/resume.html") resume.html
@@ -24,8 +24,14 @@ html(lang="en")
       != self.content
 
     footer
-      a(href="http://adamwong246.github.io/") home
+      a(href='/') home
       br
-      a(href="https://github.com/adamwong246/adamwong246.github.io") source
+      a(href=package.repository.url) source
       br
-      span adam wong 2015
+      = "v" + package.version
+      br
+      span= package.author.name
+      br
+      a(href="mailto:" + package.author.email)= package.author.email
+      br
+      span 2015
