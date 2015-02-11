@@ -57,7 +57,7 @@ task 'build.resume.pdf', (options) ->
 task 'build.blogs', (options) ->
   _.forEach memo_universe().blog_entries, (blog_entry) ->
     console.log(blog_entry.url)
-    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {page: blog_entry})))
+    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {entry: blog_entry})))
     (err) ->
       if err
         console.log err

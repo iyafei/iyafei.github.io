@@ -4,6 +4,4 @@ block content
   ul
     - for entry in blog_entries
       li
-        h2
-          a(href=entry.url)= entry.meta.title
-        != entry.content
+        include blog_entry_partial
