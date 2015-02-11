@@ -22,14 +22,6 @@ universe = ->
 
 memo_universe = memoize(universe);
 
-task 'build.resume.html', (options) ->
-  fs.writeFile "./tmp/resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, memo_universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
-    if err
-      console.log err
-    else
-      console.log "The file was saved!"
-    return
-
 task 'build.resume.pdf', (options) ->
   markdownpdf().from('_src/resume.md').to './tmp/resume.pdf', ->
     console.log "resume.pdf"
