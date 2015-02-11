@@ -6,18 +6,19 @@ html(lang="en")
     block page_title
       title exact change only
   body
-    a(href="/")
-      h1 exact change only
-    ul.contact
-      li
-        a(href="mailto:adamwong246@gmail.com") adamwong246@gmail.com
-    ul.links
-      li
-        a(href="/resume.html") resume.html
-    ul.nav
-      - for entry in blog_entries
+    nav
+      a(href="/")
+        h1 exact change only
+      ul.contact
         li
-          a(href=entry.url)= entry.meta.title
+          a(href="mailto:adamwong246@gmail.com") adamwong246@gmail.com
+      ul.pages
+        li
+          a(href="/resume.html") resume.html
+      ul.blog_entries
+        - for entry in blog_entries
+          li
+            a(href=entry.url)= entry.meta.title
 
     block content
       != self.content
