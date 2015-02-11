@@ -31,30 +31,30 @@ task 'build.resume.pdf', (options) ->
     console.log 'Done'
 
 task 'build.index', (options) ->
-  fs.writeFile "./dist/index.html", jade.renderFile("./_src/index.jade", _.merge(jade_opts, universe() )), (err) ->
+  fs.writeFile "./index.html", jade.renderFile("./_src/index.jade", _.merge(jade_opts, universe() )), (err) ->
     if err
       console.log err
     else
-      console.log "./dist/index.html"
+      console.log "./index.html"
     return
 
 task 'build.resume.html', (options) ->
-  fs.writeFile "./dist/resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
+  fs.writeFile "./resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
     if err
       console.log err
     else
-      console.log "./dist/resume.html"
+      console.log "./resume.html"
     return
 
 task 'build.resume.pdf', (options) ->
-  markdownpdf().from('_src/resume.md').to './dist/resume.pdf', ->
+  markdownpdf().from('_src/resume.md').to './resume.pdf', ->
     console.log '_src/resume.md'
     return
 
 task 'build.blogs', (options) ->
   _.forEach universe().blog_entries, (blog_entry) ->
     console.log(blog_entry.url)
-    fs.writeFile('./dist' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, universe(), {page: blog_entry})))
+    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, universe(), {page: blog_entry})))
     (err) ->
       if err
         console.log err
@@ -65,7 +65,7 @@ task 'build.blogs', (options) ->
 
 task 'server', (options) ->
   console.log('server now running on port 8080...')
-  file = new (sstatic.Server)('./dist')
+  file = new (sstatic.Server)('.')
   http.createServer((req, res) ->
     file.serve req, res
     return
