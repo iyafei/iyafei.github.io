@@ -32,14 +32,14 @@ task 'build.resume.html', (options) ->
 
 task 'build.resume.pdf', (options) ->
   markdownpdf().from('_src/resume.md').to './tmp/resume.pdf', ->
-    console.log 'Done'
+    console.log "resume.pdf"
 
 task 'build.index', (options) ->
   fs.writeFile "./index.html", jade.renderFile("./_src/index.jade", _.merge(jade_opts, memo_universe() )), (err) ->
     if err
       console.log err
     else
-      console.log "./index.html"
+      console.log "index.html"
     return
 
 task 'build.resume.html', (options) ->
@@ -47,12 +47,12 @@ task 'build.resume.html', (options) ->
     if err
       console.log err
     else
-      console.log "./resume.html"
+      console.log "resume.html"
     return
 
 task 'build.resume.pdf', (options) ->
   markdownpdf().from('_src/resume.md').to './resume.pdf', ->
-    console.log '_src/resume.md'
+    console.log 'resume.pdf'
     return
 
 task 'build.blogs', (options) ->
