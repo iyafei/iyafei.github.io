@@ -22,9 +22,6 @@ universe = ->
 
 memo_universe = memoize(universe);
 
-task 'build.resume.pdf', (options) ->
-  markdownpdf().from('_src/resume.md').to './tmp/resume.pdf', ->
-    console.log "resume.pdf"
 
 task 'build.index', (options) ->
   fs.writeFile "./index.html", jade.renderFile("./_src/index.jade", _.merge(jade_opts, memo_universe() )), (err) ->
@@ -32,6 +29,18 @@ task 'build.index', (options) ->
       console.log err
     else
       console.log "index.html"
+    return
+
+task 'build.blogs', (options) ->
+  _.forEach memo_universe().blog_entries, (blog_entry) ->
+    console.log(blog_entry.url)
+    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {entry: blog_entry})))
+    (err) ->
+      if err
+        console.log err
+      else
+        console.log 'The file was saved!'
+      return
     return
 
 task 'build.resume.html', (options) ->
@@ -67,6 +76,13 @@ task 'build.assets', (options) ->
     console.log('style.css')
     return
 
+task 'build', (options) ->
+  invoke('build.index')
+  invoke('build.blogs')
+  invoke('build.resume.pdf')
+  invoke('build.resume.html')
+  invoke('build.assets')
+
 task 'server', (options) ->
   console.log('server now running on port 8080...')
   file = new (sstatic.Server)('.')
@@ -74,10 +90,3 @@ task 'server', (options) ->
     file.serve req, res
     return
   ).listen 8080
-
-task 'build', (options) ->
-  invoke('build.index')
-  invoke('build.blogs')
-  invoke('build.resume.pdf')
-  invoke('build.resume.html')
-  invoke('build.assets')
