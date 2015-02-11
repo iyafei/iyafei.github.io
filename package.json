@@ -1,7 +1,7 @@
 {
   "name": "adamwong246.github.io",
-  "version": "0.0.0",
-  "description": "This is an exceedingly simple blog made with Middleman and deployed to Github pages here: http://adamwong246.github.io/",
+  "version": "0.0.1",
+  "description": "An exceedingly simple blog written in coffeescript, run by cake, managed with npm and hosted on Github pages.",
   "main": "index.js",
   "repository": {
     "type": "git",
