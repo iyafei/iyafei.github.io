@@ -11,6 +11,7 @@ Technical Skills
 -	Rspec and Cucumber
 -	Git and SQL
 -	HTML, CSS, JS, jQuery
+-	Node, coffeescript, NPM, Bower
 -	Github, Heroku and Amazon services
 -	Java and Android
 -	BDD and TDD methodologies
@@ -19,9 +20,13 @@ Technical Skills
 Experience
 ----------
 
+### Full Stack Developer, [chroma.io](http://www.chroma.io/)
+
+#### Portland, OR - May, 2013
+
 ### Ruby on Rails Developer, [hubbubhealth.com](https://www.hubbubhealth.com/)
 
-#### Portland, OR - Current
+#### Portland, OR - May, 2013 - February, 2015
 
 To meet the changing requirements of our users, I worked with an existing team to incentivize employee wellness.
 
