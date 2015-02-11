@@ -7,6 +7,7 @@ slug = require("slug")
 markdownpdf = require("markdown-pdf")
 sstatic = require('node-static')
 http = require('http')
+memoize = require('memoizee')
 
 jade_opts =
   pretty: true
@@ -18,8 +19,10 @@ universe = ->
     page.url = "/blog/" + slug(page.meta.title) + ".html"
   return {"blog_entries":blog_entries}
 
+memo_universe = memoize(universe);
+
 task 'build.resume.html', (options) ->
-  fs.writeFile "./tmp/resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
+  fs.writeFile "./tmp/resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, memo_universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
     if err
       console.log err
     else
@@ -31,7 +34,7 @@ task 'build.resume.pdf', (options) ->
     console.log 'Done'
 
 task 'build.index', (options) ->
-  fs.writeFile "./index.html", jade.renderFile("./_src/index.jade", _.merge(jade_opts, universe() )), (err) ->
+  fs.writeFile "./index.html", jade.renderFile("./_src/index.jade", _.merge(jade_opts, memo_universe() )), (err) ->
     if err
       console.log err
     else
@@ -39,7 +42,7 @@ task 'build.index', (options) ->
     return
 
 task 'build.resume.html', (options) ->
-  fs.writeFile "./resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
+  fs.writeFile "./resume.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, memo_universe(), {page: mm.parseFileSync("./_src/resume.md")} )), (err) ->
     if err
       console.log err
     else
@@ -52,9 +55,9 @@ task 'build.resume.pdf', (options) ->
     return
 
 task 'build.blogs', (options) ->
-  _.forEach universe().blog_entries, (blog_entry) ->
+  _.forEach memo_universe().blog_entries, (blog_entry) ->
     console.log(blog_entry.url)
-    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, universe(), {page: blog_entry})))
+    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {page: blog_entry})))
     (err) ->
       if err
         console.log err
