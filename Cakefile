@@ -9,6 +9,7 @@ sstatic = require('node-static')
 http = require('http')
 memoize = require('memoizee')
 file_concat = require('concat')
+path = require('path')
 
 jade_opts =
   pretty: true
@@ -21,6 +22,24 @@ universe = ->
   return {"blog_entries":blog_entries, "package": require("./package.json")}
 
 memo_universe = memoize(universe);
+
+task 'new.blog_entry', (options) ->
+  maxPlusOne = Math.max.apply(null, _.map(glob.sync('_src/blog_entries/*.md'), (page) ->
+    parseInt(path.basename(page, '.md'))
+  )) + 1
+
+  newFile = "./_src/blog_entries/#{maxPlusOne}.md"
+  fs.writeFile newFile, """
+  ---
+  title: CHANGE ME
+  publishedAt: #{new Date().toString()}
+  ---
+  """, (err) ->
+    if err
+      console.log err
+    else
+      console.log(newFile)
+    return
 
 
 task 'build.index', (options) ->
