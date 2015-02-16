@@ -1,7 +1,5 @@
 extends layout.jade
 
 block content
-  ul
-    - for entry in blog_entries
-      li
-        include blog_entry_partial
+  - for entry in blog_entries
+    include blog_entry_partial
