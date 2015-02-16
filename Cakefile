@@ -1,6 +1,8 @@
 _ = require("lodash")
 jade = require("jade")
+filendir = require('filendir')
 fs = require("fs")
+fs_extra = require('fs-extra')
 glob = require("glob")
 mm = require("marky-mark")
 slug = require("slug")
@@ -16,19 +18,29 @@ jade_opts =
 
 universe = ->
   console.log("building the universe...")
-  blog_entries = mm.parseMatchesSync("../../", [ "_src/blog_entries/*.md" ])
-  _.each blog_entries, (page) ->
-    page.url = "/blog/" + slug(page.meta.title) + ".html"
-  return {"blog_entries":blog_entries, "package": require("./package.json")}
+
+  return {"blog_entries":_.map(glob.sync("_src/blog_entries/*"), (page) ->
+    m = mm.parseFileSync(page + "/index.md")
+    m.dest = "/blog/" + slug(m.meta.title) + "/index.html"
+    m.url = "/blog/" + slug(m.meta.title)
+    m.src = page
+
+    m.assets = {"jpgs": glob.sync("#{m.src }/*.jpg")}
+
+    # filters and replaces instances of local assets with absolute paths
+    _.each m.assets.jpgs, (jpg) ->
+      m.content = m.content.replace(path.basename(jpg), m.url + "/" + path.basename(jpg))
+    return m
+  ), "package": require("./package.json")}
 
 memo_universe = memoize(universe);
 
 task 'new.blog_entry', (options) ->
-  maxPlusOne = Math.max.apply(null, _.map(glob.sync('_src/blog_entries/*.md'), (page) ->
+  maxPlusOne = Math.max.apply(null, _.map(glob.sync('_src/blog_entries/*'), (page) ->
     parseInt(path.basename(page, '.md'))
   )) + 1
 
-  newFile = "./_src/blog_entries/#{maxPlusOne}.md"
+  newFile = "./_src/blog_entries/#{maxPlusOne}/index.md"
   fs.writeFile newFile, """
   ---
   title: CHANGE ME
@@ -52,8 +64,8 @@ task 'build.index', (options) ->
 
 task 'build.blogs', (options) ->
   _.forEach memo_universe().blog_entries, (blog_entry) ->
-    console.log(blog_entry.url)
-    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {entry: blog_entry})))
+    console.log(blog_entry.dest)
+    fs.writeFile('.' + blog_entry.dest, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {entry: blog_entry})))
     (err) ->
       if err
         console.log err
@@ -77,8 +89,8 @@ task 'build.resume.pdf', (options) ->
 
 task 'build.blogs', (options) ->
   _.forEach memo_universe().blog_entries, (blog_entry) ->
-    console.log(blog_entry.url)
-    fs.writeFile('.' + blog_entry.url, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {entry: blog_entry})))
+    console.log(blog_entry.dest)
+    filendir.wa('.' + blog_entry.dest, jade.renderFile('./_src/blog_entry_layout.jade', _.merge(jade_opts, memo_universe(), {entry: blog_entry})))
     (err) ->
       if err
         console.log err
@@ -87,7 +99,7 @@ task 'build.blogs', (options) ->
       return
     return
 
-task 'build.assets', (options) ->
+task 'build.assets.style', (options) ->
   file_concat [
     './_src/style.css'
     './node_modules/normalize.css/normalize.css'
@@ -95,12 +107,22 @@ task 'build.assets', (options) ->
     console.log('style.css')
     return
 
+task 'build.assets.image', (options) ->
+  _.forEach memo_universe().blog_entries, (blog_entry) ->
+    _.each blog_entry.assets.jpgs, (jpg) ->
+      dest = ".#{blog_entry.url}/#{path.basename(jpg)}"
+      fs_extra.copy jpg, dest, (err) ->
+        if (err)
+          return console.error(err)
+        console.log("#{jpg} -> #{dest}")
+
 task 'build', (options) ->
   invoke('build.index')
   invoke('build.blogs')
   invoke('build.resume.pdf')
   invoke('build.resume.html')
-  invoke('build.assets')
+  invoke('build.assets.style')
+  invoke('build.assets.image')
 
 task 'server', (options) ->
   console.log('server now running on port 8080...')
