@@ -9,7 +9,13 @@ html(lang="en")
     header
       a(href="/")
         h1 exact change only
-      a(href="mailto:" + package.author.email)= package.author.email
+      ul.contacts
+        li
+          a(href="mailto:" + package.author.email)= package.author.email
+        li
+          a(href="https://twitter.com/adamwong246") https://twitter.com/adamwong246
+        li
+          a(href="github.com/adamwong246") github.com/adamwong246
     .HolyGrail-body
       main.HolyGrail-content
         block content
@@ -18,6 +24,10 @@ html(lang="en")
         ul.pages
           li
             a(href="/resume.html") resume.html
+          li
+            a(href="/resume.pdf") resume.pdf
+          li
+            a(href="https://raw.githubusercontent.com/adamwong246/adamwong246.github.io/master/_src/resume.md") resume.md
         ul.blog_entries
           - for entry in blog_entries
             li
