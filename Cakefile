@@ -99,6 +99,14 @@ task 'build.blogs', (options) ->
       return
     return
 
+task 'build.readme', (options) ->
+  fs.writeFile "./README.html", jade.renderFile("./_src/resume_layout.jade", _.merge(jade_opts, memo_universe(), {page: mm.parseFileSync("./README.md")} )), (err) ->
+    if err
+      console.log err
+    else
+      console.log "README.html"
+    return
+
 task 'build.assets.style', (options) ->
   file_concat [
     './_src/style.css'
@@ -119,10 +127,11 @@ task 'build.assets.image', (options) ->
 task 'build', (options) ->
   invoke('build.index')
   invoke('build.blogs')
-  invoke('build.resume.pdf')
+  invoke('build.readme')
   invoke('build.resume.html')
   invoke('build.assets.style')
   invoke('build.assets.image')
+  invoke('build.resume.pdf')
 
 task 'server', (options) ->
   console.log('server now running on port 8080...')
