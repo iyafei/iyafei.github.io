@@ -1,11 +1,18 @@
 doctype html
 html(lang="en")
   head
-    meta(charset="utf-8")
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='HandheldFriendly', content='True')
+    meta(name='MobileOptimized', content='320')
+    meta(name='viewport', content='width=device-width, minimum-scale=1.0, maximum-scale=1.0')
+
     link(href='/style.css', rel='stylesheet', type="text/css")
+
     block page_title
       title exact change only
-  body.HolyGrail.Site
+
+  body.HolyGrail
     header
       a(href="/")
         h1 exact change only
@@ -35,15 +42,15 @@ html(lang="en")
             li
               a(href=entry.url)= entry.meta.title
       aside.HolyGrail-ads
+        a(href='/') home
+        br
+        a(href=package.repository.url) source
+        br
+        = "v" + package.version
+        br
+        span= package.author.name
+        br
+        a(href="mailto:" + package.author.email)= package.author.email
+        br
+        span 2015
     footer
-      a(href='/') home
-      br
-      a(href=package.repository.url) source
-      br
-      = "v" + package.version
-      br
-      span= package.author.name
-      br
-      a(href="mailto:" + package.author.email)= package.author.email
-      br
-      span 2015
