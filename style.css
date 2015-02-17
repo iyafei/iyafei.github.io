@@ -607,3 +607,7 @@ ul{
   -webkit-padding-start: 0px;
   list-style: none;
 }
+
+nav h1{
+  text-align: center;
+}
