@@ -1,12 +1,12 @@
 img {max-width:100%;}
 
-p {max-width:35rem;}
+p, li, ol {max-width:35rem;}
 
-ul{
+nav ul {
   -webkit-padding-start: 0px;
   list-style: none;
 }
 
-nav h1{
+nav .site_title{
   text-align: center;
 }

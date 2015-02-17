@@ -111,6 +111,7 @@ task 'build.assets.style', (options) ->
   file_concat [
     './node_modules/normalize.css/normalize.css'
     './_src/flexbox-holy-grail.css'
+    './_src/typebase.css'
     './_src/style.css'
   ], 'style.css', (error) ->
     console.log('style.css')
