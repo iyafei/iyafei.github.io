@@ -588,6 +588,17 @@ HolyGrail {
     margin: 0;
   }
 }
+
+/*http://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/*/
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
 img {max-width:100%;}
 
 p {max-width:35rem;}
