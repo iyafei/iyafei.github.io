@@ -587,10 +587,12 @@ HolyGrail {
     padding: 0 2em;
     margin: 0;
   }
-  .HolyGrail-nav, .HolyGrail-ads {
-    flex: 0 0 12em;
-  }
 }
 img {max-width:100%;}
 
 p {max-width:35rem;}
+
+ul{
+  -webkit-padding-start: 0px;
+  list-style: none;
+}

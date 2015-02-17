@@ -160,7 +160,4 @@ HolyGrail {
     padding: 0 2em;
     margin: 0;
   }
-  .HolyGrail-nav, .HolyGrail-ads {
-    flex: 0 0 12em;
-  }
 }

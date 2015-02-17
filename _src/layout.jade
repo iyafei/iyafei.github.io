@@ -14,20 +14,25 @@ html(lang="en")
 
   body.HolyGrail
     header
-      a(href="/")
-        h1 exact change only
-      ul.contacts
-        li
-          a(href="mailto:" + package.author.email)= package.author.email
-        li
-          a(href="https://twitter.com/adamwong246") https://twitter.com/adamwong246
-        li
-          a(href="github.com/adamwong246") github.com/adamwong246
     .HolyGrail-body
       main.HolyGrail-content
         block content
           != self.content
       nav.HolyGrail-nav
+        a(href="/")
+          h1
+            | exact
+            <br/>
+            | change
+            <br/>
+            | only
+        ul.contacts
+          li
+            a(href="mailto:" + package.author.email)= package.author.email
+          li
+            a(href="https://twitter.com/adamwong246") https://twitter.com/adamwong246
+          li
+            a(href="github.com/adamwong246") github.com/adamwong246
         ul.pages
           li
             a(href="/README.html") README.html
@@ -41,16 +46,17 @@ html(lang="en")
           - for entry in blog_entries
             li
               a(href=entry.url)= entry.meta.title
-      aside.HolyGrail-ads
-        a(href='/') home
-        br
-        a(href=package.repository.url) source
-        br
-        = "v" + package.version
-        br
-        span= package.author.name
-        br
-        a(href="mailto:" + package.author.email)= package.author.email
-        br
-        span 2015
+      //aside.HolyGrail-ads
+
     footer
+      a(href='/') home
+      br
+      a(href=package.repository.url) source
+      br
+      = "v" + package.version
+      br
+      span= package.author.name
+      br
+      a(href="mailto:" + package.author.email)= package.author.email
+      br
+      span 2015
