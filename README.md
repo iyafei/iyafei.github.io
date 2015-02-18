@@ -10,3 +10,4 @@ It is under constant development and you can follow on github. Even better, why 
 
 ### Rules
 1. Thou shalt not use `<h1>` or `<h2>` in content. `<h1>` is reserved the title of the website and `<h2>` is reserved for the *page* title.
+2. Thou shalt support modern browsers first and foremost.
