@@ -9,5 +9,13 @@ This is an attempt to build a blog from the ground up. It is built out of pure c
 It is under constant development and you can follow on github. Even better, why don't you fork it for yourself?
 
 ### Rules
-1. Thou shalt not use `<h1>` or `<h2>` in content. `<h1>` is reserved the title of the website and `<h2>` is reserved for the *page* title.
-2. Thou shalt support modern browsers first and foremost.
+- Thou shalt not use `<h1>` or `<h2>` in content. `<h1>` is reserved the title of the website and `<h2>` is reserved for the *page* title.
+- Thou shalt support modern browsers first and foremost.
+- HTML shall be semantic.
+- All languages shall be indentation sensitive.
+
+### Credits
+- http://necolas.github.io/normalize.css
+- http://philipwalton.github.io/solved-by-flexbox/demos/holy-grail
+- http://devinhunt.github.io/typebase.css
+- and all contributors to node and it's packages

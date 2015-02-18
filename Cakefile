@@ -44,7 +44,7 @@ task 'new.blog_entry', (options) ->
   )) + 1
 
   newFile = "./_src/blog_entries/#{maxPlusOne}/index.md"
-  fs.writeFile newFile, """
+  fs_extra.outputFile newFile, """
   ---
   title: CHANGE ME
   publishedAt: #{new Date().toString()}
