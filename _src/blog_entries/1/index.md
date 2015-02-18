@@ -1,5 +1,6 @@
 ---
 title: Soylent, day to day
+publishedAt: Thu Feb 12 2015 15:47:27 GMT-0800 (PST)
 ---
 
 Ever since I backed Soylent on Kickstarter, I've been a little obsessed with the stuff. Well, "obsessed" might not be the right word... "consumed" might be a better. "Evangelical" has been tossed around. Seriously, a day does not go by when I do not attempt to bring some poor soul into fold. If someone asks what biege slurry I'm gulping down, I launch into a full scale attack to win the hearts and minds of "fooders" and turn them into "Soylentarians."

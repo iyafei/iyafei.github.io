@@ -19,7 +19,7 @@ jade_opts =
 universe = ->
   console.log("building the universe...")
 
-  return {"blog_entries":_.map(glob.sync("_src/blog_entries/*"), (page) ->
+  return {"blog_entries":_.sortBy(_.map(glob.sync("_src/blog_entries/*"), (page) ->
     m = mm.parseFileSync(page + "/index.md")
     m.dest = "/blog/" + slug(m.meta.title) + "/index.html"
     m.url = "/blog/" + slug(m.meta.title)
@@ -31,6 +31,8 @@ universe = ->
     _.each m.assets.jpgs, (jpg) ->
       m.content = m.content.replace(path.basename(jpg), m.url + "/" + path.basename(jpg))
     return m
+  ), (n) ->
+    return n.meta.publishedAt
   ), "package": require("./package.json"),
   "moment": moment = require("moment") }
 
