@@ -31,7 +31,8 @@ universe = ->
     _.each m.assets.jpgs, (jpg) ->
       m.content = m.content.replace(path.basename(jpg), m.url + "/" + path.basename(jpg))
     return m
-  ), "package": require("./package.json")}
+  ), "package": require("./package.json"),
+  "moment": moment = require("moment") }
 
 memo_universe = memoize(universe);
 
