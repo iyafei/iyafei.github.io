@@ -22,8 +22,9 @@ universe = ->
 
   return {"blog_entries":_.sortBy(_.map(glob.sync("_src/blog_entries/*"), (page) ->
     m = mm.parseFileSync(page + "/index.md")
-    m.dest = "/blog/" + slug(m.meta.title) + "/index.html"
-    m.url = "/blog/" + slug(m.meta.title)
+
+    m.url = "/blog/#{path.basename(page)}-#{slug(m.meta.title)}"
+    m.dest = m.url + "/index.html"
     m.src = page
 
     m.assets = {"jpgs": glob.sync("#{m.src }/*.jpg")}
