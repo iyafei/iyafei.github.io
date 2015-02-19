@@ -12,6 +12,7 @@ mm = require("marky-mark")
 path = require('path')
 slug = require("slug")
 sstatic = require('node-static')
+watch = require('watch')
 
 jade_opts =
   pretty: true
@@ -145,3 +146,25 @@ task 'server', (options) ->
     file.serve req, res
     return
   ).listen 8080
+
+task 'build_serve_watch', (options) ->
+  invoke('build')
+  invoke('server')
+
+  watch.createMonitor './_src', (monitor) ->
+    monitor.files['/**/*']
+
+    monitor.on 'created', (f, stat) ->
+      memo_universe.clear();
+      invoke('build')
+      return
+    monitor.on 'changed', (f, curr, prev) ->
+      memo_universe.clear();
+      invoke('build')
+      return
+    monitor.on 'removed', (f, stat) ->
+      memo_universe.clear();
+      invoke('build')
+      return
+    # monitor.stop()
+    return
