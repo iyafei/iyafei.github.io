@@ -10,3 +10,7 @@ nav ul {
 nav .site_title{
   text-align: center;
 }
+
+p, li {
+  font-family: 'Lato';
+}
