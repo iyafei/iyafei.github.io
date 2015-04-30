@@ -25,6 +25,51 @@
       <main class="HolyGrail-content Site-content">
         <article>
           <header>
+            <h2>Meteor: the first month</h2>
+            <time>March 21st 2015</time>
+          </header>
+          <hr><p>There&#39;s an exciting new stack for optimistic developers called Meteor and I&#39;ve had the great pleasure of focusing on learning it for the past month. This is what I&#39;ve learned.</p>
+<p>Meteor is framework based on the high-minded ideal of <em>isomorphic</em> javascript, which is a fancy way of saying, &quot;It&#39;s javascript, on the server too!&quot; I find this notion absolutely titilating, though I&#39;m sure other&#39;s are heaving at the very thought. Ok, that&#39;s fair. But give it a chance! It&#39;s an incredibly flexible technology and with a little bit of experience, you&#39;ll find that Meteor is a fantastic tool for building prototypes which evolve into mature software. Meteor is production ready and the time to dive in is now!</p>
+<h2 id="the-basics">The basics</h2>
+<h3 id="meteor-is-not-like-rails-">Meteor is not like Rails.</h3>
+<p>I&#39;m a RoR guy. I bet if you are reading this, there&#39;s a good chance that you cut your teeth on Rails. <strong>Forget all of it.</strong></p>
+<p>Meteor does not use HTTP to communicate between the server and client. Rather, it uses Websockets and the Distributed Data Protocol (DDP) to create magical, reactive variables which map Mongo documents to the view.</p>
+<p>Meteor uses Collections to store individual documents but by publishing and subscribing to other collections over DDP. This feels weird, at first, but it&#39;s actually quite natural.</p>
+<p>The server publishes some orders</p>
+<pre><code>
+Meteor.publish &#39;validOrders&#39; -&gt;
+ Orders.find {&#39;valid&#39;: true}, {userId: 0}
+
+
+Meteor.publish &#39;myOrders&#39; -&gt;
+ Orders.find {&#39;userId&#39;: Meteor.userId()}</code></pre>
+<p>and the client subscribes</p>
+<pre><code>Meteor.subscribe &#39;orders&#39;
+Meteor.subscribe &#39;myOrders&#39;</code></pre>
+<p>Hence, the client <em>has access</em> to a subset of all Order documents. You an even limit not just a set, but you can whitelist and blacklist certain attributes. This is an important distinction. The client now has access to</p>
+<ul>
+<li>Orders of which &quot;belong&quot; to said users</li>
+<li>Orders which are valid but not the userId fields</li>
+</ul>
+<p>And this subscription is now reactive and those order directly map to HTML through you handlebars templates. And the client is usually requesting a subset of records based on a query.</p>
+<pre><code>Template.example.helpers
+ orders: -&gt;
+  Orders.find({active: true})</code></pre>
+<p>Therefore, the documents which are shared are the overlap between these 2 subsets- those published by the server and those queried from a helper.</p>
+<p>Of course, if you are a beginner, you&#39;ve got the autopublish package installed and every document is simply available to the client. That&#39;s fine for now but don&#39;t leave it in your app forever.</p>
+<p>A similar package to look out for is the <code>insecure</code> which allows the &quot;client to write to the database&quot;. It think this is a bit of a mischaracterization, because the client can&#39;t ever &quot;write to the database.&quot; Every write to the database is done over Meteor Methods. The <code>insecure</code> package simply implement this niavely- you&#39;l want your version of the same methods to have more security</p>
+<p>Overall, the impression upon me is very different from Rails. Rails is about strict separation of logic and view, with a controller to handle the details of http. Meteor is less &quot;opinionated&quot; but it forces you to deal more directly with details in a less abstract way. You need to understand the underlying technology. Out of the box, Meteor enforces no MVP, though you <em>could</em> implement such. Be careful, because without those rails, it&#39;s easy to tangle your logic and your implementation!</p>
+<h3 id="meteor-is-backed-by-a-mongo-db-and-loves-json">Meteor is backed by a mongo db and loves JSON</h3>
+<p>Adios SQL! I&#39;ve personally always despised SQL. I <em>get</em> it, sort of, but it never felt natural. Mongo is a breath of fresh air. Not only is every document a plain JSON object, queries are also JSON. Yes, you can have a schema, if you want. Yes, migrations are an real consideration. </p>
+<h3 id="meteor-requires-yet-another-package-manger-">Meteor requires <strong>yet another</strong> package manger.</h3>
+<p>It is, however, a very nice and necessary.</p>
+<h3 id="meteor-is-a-framework-not-a-library-">Meteor is a framework, not a library.</h3>
+<p>This is a blessing in disguise. Node devs will know all too well the horror of the &quot;callback hell.&quot; To me, it&#39;s a flaw in the language to have such poor, inconsistent support for asynchronous operations. Sorry folks, js just kind of stinks like that. But with Meteor, this issue is mostly sidestepped. Meteor calls your functions, not the other way round. So good (presumbly!) practices are enforced from above, quite frankly for the better.</p>
+<h3 id="but-it-s-still-just-js">But it&#39;s still just js</h3>
+<p>Let&#39;s face facts: node&#39;s asynchronous support is overhyped. Sure, it powerful but the community is fragmented on how to support asynchronous operations and it&#39;s hard to implement. Promises, threads, futures, generators, etc are absolutely overwhelming and bewildering. Meteor does it&#39;s best to shield you from these concerns but you&#39;ll still have to tackle these complex issues at some point.</p>
+        </article>
+        <article>
+          <header>
             <h2>First post</h2>
             <time>February 11th 2015</time>
           </header>
@@ -80,6 +125,14 @@
 <p>Of course, you can see for yourself by <a href="https://github.com/adamwong246/adamwong246.github.io/commits/master">tracking the commits on github</a>! And if you wanted to see what&#39;s next on my todo list, check out the <a href="https://github.com/adamwong246/adamwong246.github.io/issues">issues</a>.</p>
 <p>Finally, I bumped the version to <code>0.1.0</code>, which according to SemVer I should have done already. </p>
         </article>
+        <article>
+          <header>
+            <h2>Something he’d found and lost so many times</h2>
+            <time>April 29th 2015</time>
+          </header>
+          <hr><p>“It belonged, he knew – he remembered – as she pulled him down, to the meat, the flesh the cowboys mocked. It was a vast thing, beyond knowing, a sea of information coded in spiral and pheromone, infinite intricacy that only the body, in its strong blind way, could ever read.” 
+― William Gibson, Neuromancer</p>
+        </article>
       </main>
       <nav class="HolyGrail-nav"><a href="/">
           <h1 class="site_title">
@@ -102,11 +155,13 @@
           <li><a href="https://raw.githubusercontent.com/adamwong246/adamwong246.github.io/master/_src/resume.md">resume.md</a></li>
         </ul>
         <ul class="blog_entries">
+          <li><a href="/blog/5-Meteor-the-first-month">Meteor: the first month</a></li>
           <li><a href="/blog/0-First-post">First post</a></li>
           <li><a href="/blog/1-Soylent-day-to-day">Soylent, day to day</a></li>
           <li><a href="/blog/2-Generators">Generators</a></li>
           <li><a href="/blog/3-Dogs">Dogs</a></li>
           <li><a href="/blog/4-Status-update">Status update</a></li>
+          <li><a href="/blog/6-Something-hed-found-and-lost-so-many-times">Something he’d found and lost so many times</a></li>
         </ul>
       </nav>
       <!--aside.HolyGrail-ads-->
